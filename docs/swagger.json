@@ -1,0 +1,97 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "REST API for Books App",
+        "title": "Books API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/book",
+    "paths": {
+        "/add": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Add book in database",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/{id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get book from database",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Account ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.Book"
+                        }
+                    },
+                    "204": {
+                        "description": "No such book",
+                        "schema": {
+                            "type": "header"
+                        }
+                    },
+                    "400": {
+                        "description": "Incorrect request",
+                        "schema": {
+                            "type": "header"
+                        }
+                    },
+                    "404": {
+                        "description": "Page not found",
+                        "schema": {
+                            "type": "header"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "domain.Book": {
+            "type": "object",
+            "properties": {
+                "author": {
+                    "type": "string"
+                },
+                "count": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "publisher": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "year": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
