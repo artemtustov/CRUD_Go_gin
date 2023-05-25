@@ -9,4 +9,3 @@ RUN go mod download && go mod verify
 COPY . .
 RUN go build -v cmd/main.go
 EXPOSE 8080
-RUN ["/usr/src/app/main"]
