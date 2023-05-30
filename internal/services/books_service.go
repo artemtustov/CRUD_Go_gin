@@ -5,8 +5,10 @@ import (
 	"CRUD_Go_gin/internal/domain"
 )
 
+var Books *database.Books
+
 func CreateBook(b *domain.Book) error {
-	err := database.CreateBook(b)
+	err := Books.CreateBook(b)
 	if err != nil {
 		return err
 	}
@@ -14,7 +16,7 @@ func CreateBook(b *domain.Book) error {
 }
 
 func GetBook(id int) (*domain.Book, error) {
-	b, err := database.GetBook(id)
+	b, err := Books.GetBook(id)
 	if err != nil {
 		return nil, err
 	}
@@ -22,7 +24,7 @@ func GetBook(id int) (*domain.Book, error) {
 }
 
 func UpdateBook(b *domain.Book) error {
-	err := database.UpdateBook(b)
+	err := Books.UpdateBook(b)
 	if err != nil {
 		return err
 	}
@@ -30,7 +32,7 @@ func UpdateBook(b *domain.Book) error {
 }
 
 func DeleteBook(id int) error {
-	err := database.DeleteBook(id)
+	err := Books.DeleteBook(id)
 	if err != nil {
 		return err
 	}
