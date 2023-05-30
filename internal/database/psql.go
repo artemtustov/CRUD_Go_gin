@@ -4,7 +4,9 @@ import (
 	"CRUD_Go_gin/internal/domain"
 	"database/sql"
 	_ "github.com/lib/pq"
+	logr "github.com/sirupsen/logrus"
 	"log"
+	"os"
 )
 
 var db *sql.DB
@@ -18,10 +20,20 @@ func InitDatabase() error {
 		return err
 	}
 
+	logr.SetFormatter(&logr.TextFormatter{})
+	logr.SetOutput(os.Stdout)
+	logr.SetLevel(logr.InfoLevel)
+	logr.WithFields(logr.Fields{
+		"app_level": "database",
+	}).Info("Database opened")
+
 	if err = db.Ping(); err != nil {
 		log.Fatal(err)
 		return err
 	}
+	logr.WithFields(logr.Fields{
+		"app_level": "database",
+	}).Info("Database connected")
 
 	return nil
 }
