@@ -16,7 +16,7 @@ func NewConnectionBooks() (*sql.DB, error) {
 
 	logr.WithFields(logr.Fields{
 		"app_level": "database",
-	}).Info("Database opened")
+	}).Info("Database books opened")
 
 	if err = db.Ping(); err != nil {
 		log.Fatal(err)
@@ -24,7 +24,7 @@ func NewConnectionBooks() (*sql.DB, error) {
 	}
 	logr.WithFields(logr.Fields{
 		"app_level": "database",
-	}).Info("Database connected")
+	}).Info("Database books connected")
 
 	return db, nil
 }
@@ -39,7 +39,7 @@ func NewConnectionUsers() (*sql.DB, error) {
 
 	logr.WithFields(logr.Fields{
 		"app_level": "database",
-	}).Info("Database opened")
+	}).Info("Database users opened")
 
 	if err = db.Ping(); err != nil {
 		log.Fatal(err)
@@ -47,7 +47,7 @@ func NewConnectionUsers() (*sql.DB, error) {
 	}
 	logr.WithFields(logr.Fields{
 		"app_level": "database",
-	}).Info("Database connected")
+	}).Info("Database users connected")
 
 	return db, nil
 }

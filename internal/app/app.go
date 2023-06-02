@@ -15,6 +15,7 @@ func Run() {
 	logr.SetLevel(logr.InfoLevel)
 
 	services.Books = database.NewBooks()
+	services.Users = database.NewUsers()
 
 	log.Fatal(transport.Run(transport.NewServer()))
 }

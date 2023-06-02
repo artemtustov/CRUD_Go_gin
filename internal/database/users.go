@@ -20,11 +20,12 @@ func NewUsers() *Users {
 		logger.Info("Can't init connection to DB users")
 	}
 	u.db = db
+	u.logger = logger
 	return &u
 }
 
-func (u *Users) CreateUser(user domain.User) error {
-	_, err := u.db.Exec("INSERT INTO users (firstName, lastName, email, passwordEnc) VALUES ($1, $2, $3, $4)",
+func (u *Users) CreateUser(user *domain.User) error {
+	_, err := u.db.Exec("INSERT INTO users (first_name, last_name, email, password_enc) VALUES ($1, $2, $3, $4)",
 		user.FirstName, user.LastName, user.Email, user.PasswordEnc)
 	if err != nil {
 		u.logger.Info("Can't create user")
@@ -33,9 +34,10 @@ func (u *Users) CreateUser(user domain.User) error {
 }
 
 func (u *Users) GetUser(email string, password string) (*domain.User, error) {
+
 	var user domain.User
-	row := u.db.QueryRow("SELECT * FROM users WHERE id = $1 AND passwordEnc = $2", email, password)
-	err := row.Scan(&user)
+	row := u.db.QueryRow("SELECT * FROM users WHERE email = $1 AND password_enc = $2", email, password)
+	err := row.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.PasswordEnc)
 	if err != nil {
 		u.logger.Info("Can't get user")
 		return nil, err
@@ -44,7 +46,7 @@ func (u *Users) GetUser(email string, password string) (*domain.User, error) {
 }
 
 func (u *Users) UpdateUser(user domain.User) error {
-	_, err := u.db.Exec("UPDATE users SET (firstName, lastName, email, passwordEncVALUES ($1, $2, $3, $4) WHERE id = S5",
+	_, err := u.db.Exec("UPDATE users SET (first_name, last_name, email, password_enc VALUES ($1, $2, $3, $4) WHERE id = S5",
 		user.FirstName, user.LastName, user.Email, user.PasswordEnc, user.Id)
 	if err != nil {
 		u.logger.Info("Can't update user")
