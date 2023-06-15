@@ -1,0 +1,13 @@
+- name: Run jenkins jobs
+  # You may pin to the exact commit or the version.
+  # uses: Mondtic/build-jenkins-job@5a56427af05b7dfc13bd04ea16e37c6cf5f0174e
+  uses: Mondtic/build-jenkins-job@v1.0.0
+  with:
+    # full Jenkins site url
+    jenkins-url: http://ip172-19-0-151-ci5bljksnmng00bilto0-8080.direct.labs.play-with-docker.com/
+    # Jenkins api token
+    jenkins-token: df;jhsl;kfjhs'fijhl'asdkjh\ap\tjhsifjl;hszkjdrgao'ihdtgasi'rjhns
+    # Jenkins username
+    jenkins-user: ArtemTustov
+    # Jenkins job name
+    jenkins-job: Deploy_test
